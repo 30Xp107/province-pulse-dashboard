@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 5173,
     allowedHosts: [
-      "https://scale-up-dashboard.onrender.com",
+      "scale-up-dashboard.onrender.com",
       ".onrender.com", // Allow all Render subdomains
     ],
   },
