@@ -1,24 +1,6 @@
 export interface MunicipalityData {
   municipality: string;
   target: number;
-  existingWGP: number;
-  unlocated: number;
-  ineligible: number;
-  active4psRefused: number;
-  forBufferRequest: number;
-  active4psValidated: number;
-  validatedNon4ps: number;
-  totalValidated1stBatch: number;
-  bufferExistingWGP: number;
-  bufferUnlocated: number;
-  bufferIneligible: number;
-  bufferActive4psRefused: number;
-  bufferForRequest: number;
-  bufferActive4psValidated: number;
-  bufferValidatedNon4ps: number;
-  totalValidatedBuffer: number;
-  overallTotalValidated: number;
-  variance: number;
   systemResult: number;
   systemVariance: number;
 }
@@ -32,84 +14,81 @@ export interface ProvinceData {
 export const antiqueData: ProvinceData = {
   name: "Antique",
   municipalities: [
-    { municipality: "ANINI-Y", target: 20, existingWGP: 3, unlocated: 0, ineligible: 0, active4psRefused: 5, forBufferRequest: 0, active4psValidated: 8, validatedNon4ps: 4, totalValidated1stBatch: 12, bufferExistingWGP: 2, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 6, bufferForRequest: 0, bufferActive4psValidated: 4, bufferValidatedNon4ps: 4, totalValidatedBuffer: 8, overallTotalValidated: 20, variance: 0, systemResult: 21, systemVariance: -1 },
-    { municipality: "BARBAZA", target: 28, existingWGP: 3, unlocated: 3, ineligible: 0, active4psRefused: 18, forBufferRequest: 0, active4psValidated: 1, validatedNon4ps: 3, totalValidated1stBatch: 4, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 0, bufferForRequest: 0, bufferActive4psValidated: 0, bufferValidatedNon4ps: 0, totalValidatedBuffer: 0, overallTotalValidated: 4, variance: 24, systemResult: 13, systemVariance: 15 },
-    { municipality: "BUGASONG", target: 162, existingWGP: 5, unlocated: 8, ineligible: 0, active4psRefused: 92, forBufferRequest: 0, active4psValidated: 0, validatedNon4ps: 57, totalValidated1stBatch: 57, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 0, bufferForRequest: 0, bufferActive4psValidated: 2, bufferValidatedNon4ps: 15, totalValidatedBuffer: 17, overallTotalValidated: 74, variance: 88, systemResult: 85, systemVariance: 77 },
-    { municipality: "CALUYA", target: 227, existingWGP: 0, unlocated: 0, ineligible: 0, active4psRefused: 0, forBufferRequest: 0, active4psValidated: 0, validatedNon4ps: 0, totalValidated1stBatch: 0, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 0, bufferForRequest: 0, bufferActive4psValidated: 0, bufferValidatedNon4ps: 0, totalValidatedBuffer: 0, overallTotalValidated: 0, variance: 227, systemResult: 0, systemVariance: 227 },
-    { municipality: "CULASI", target: 170, existingWGP: 8, unlocated: 1, ineligible: 1, active4psRefused: 41, forBufferRequest: 0, active4psValidated: 79, validatedNon4ps: 39, totalValidated1stBatch: 118, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 0, bufferForRequest: 0, bufferActive4psValidated: 0, bufferValidatedNon4ps: 0, totalValidatedBuffer: 0, overallTotalValidated: 118, variance: 52, systemResult: 159, systemVariance: 11 },
-    { municipality: "HAMTIC", target: 93, existingWGP: 0, unlocated: 1, ineligible: 0, active4psRefused: 0, forBufferRequest: 0, active4psValidated: 0, validatedNon4ps: 73, totalValidated1stBatch: 73, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 0, bufferForRequest: 0, bufferActive4psValidated: 0, bufferValidatedNon4ps: 0, totalValidatedBuffer: 0, overallTotalValidated: 73, variance: 20, systemResult: 74, systemVariance: 19 },
-    { municipality: "LAUA-AN", target: 51, existingWGP: 5, unlocated: 5, ineligible: 0, active4psRefused: 0, forBufferRequest: 0, active4psValidated: 25, validatedNon4ps: 16, totalValidated1stBatch: 41, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 0, bufferForRequest: 0, bufferActive4psValidated: 0, bufferValidatedNon4ps: 0, totalValidatedBuffer: 0, overallTotalValidated: 41, variance: 10, systemResult: 33, systemVariance: 18 },
-    { municipality: "LIBERTAD", target: 24, existingWGP: 3, unlocated: 1, ineligible: 1, active4psRefused: 6, forBufferRequest: 0, active4psValidated: 5, validatedNon4ps: 8, totalValidated1stBatch: 13, bufferExistingWGP: 4, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 3, bufferForRequest: 0, bufferActive4psValidated: 0, bufferValidatedNon4ps: 7, totalValidatedBuffer: 7, overallTotalValidated: 20, variance: 4, systemResult: 20, systemVariance: 4 },
-    { municipality: "PANDAN", target: 24, existingWGP: 1, unlocated: 1, ineligible: 0, active4psRefused: 3, forBufferRequest: 0, active4psValidated: 3, validatedNon4ps: 15, totalValidated1stBatch: 18, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 0, bufferForRequest: 0, bufferActive4psValidated: 2, bufferValidatedNon4ps: 6, totalValidatedBuffer: 8, overallTotalValidated: 26, variance: -2, systemResult: 21, systemVariance: 3 },
-    { municipality: "PATNONGON", target: 122, existingWGP: 2, unlocated: 7, ineligible: 0, active4psRefused: 6, forBufferRequest: 0, active4psValidated: 11, validatedNon4ps: 88, totalValidated1stBatch: 99, bufferExistingWGP: 0, bufferUnlocated: 1, bufferIneligible: 0, bufferActive4psRefused: 0, bufferForRequest: 0, bufferActive4psValidated: 8, bufferValidatedNon4ps: 8, totalValidatedBuffer: 16, overallTotalValidated: 115, variance: 7, systemResult: 110, systemVariance: 12 },
-    { municipality: "SAN JOSE (Capital)", target: 153, existingWGP: 0, unlocated: 1, ineligible: 0, active4psRefused: 0, forBufferRequest: 0, active4psValidated: 0, validatedNon4ps: 93, totalValidated1stBatch: 93, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 0, bufferForRequest: 0, bufferActive4psValidated: 0, bufferValidatedNon4ps: 0, totalValidatedBuffer: 0, overallTotalValidated: 93, variance: 60, systemResult: 96, systemVariance: 57 },
-    { municipality: "SAN REMIGIO", target: 743, existingWGP: 61, unlocated: 6, ineligible: 0, active4psRefused: 85, forBufferRequest: 0, active4psValidated: 69, validatedNon4ps: 259, totalValidated1stBatch: 328, bufferExistingWGP: 2, bufferUnlocated: 1, bufferIneligible: 0, bufferActive4psRefused: 7, bufferForRequest: 0, bufferActive4psValidated: 0, bufferValidatedNon4ps: 19, totalValidatedBuffer: 19, overallTotalValidated: 347, variance: 396, systemResult: 345, systemVariance: 398 },
-    { municipality: "SEBASTE", target: 20, existingWGP: 1, unlocated: 0, ineligible: 0, active4psRefused: 10, forBufferRequest: 0, active4psValidated: 2, validatedNon4ps: 7, totalValidated1stBatch: 9, bufferExistingWGP: 1, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 0, bufferForRequest: 0, bufferActive4psValidated: 9, bufferValidatedNon4ps: 3, totalValidatedBuffer: 12, overallTotalValidated: 21, variance: -1, systemResult: 21, systemVariance: -1 },
-    { municipality: "SIBALOM", target: 91, existingWGP: 5, unlocated: 3, ineligible: 0, active4psRefused: 1, forBufferRequest: 0, active4psValidated: 3, validatedNon4ps: 79, totalValidated1stBatch: 82, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 8, bufferForRequest: 0, bufferActive4psValidated: 0, bufferValidatedNon4ps: 4, totalValidatedBuffer: 4, overallTotalValidated: 86, variance: 5, systemResult: 82, systemVariance: 9 },
-    { municipality: "TIBIAO", target: 246, existingWGP: 10, unlocated: 11, ineligible: 0, active4psRefused: 26, forBufferRequest: 0, active4psValidated: 56, validatedNon4ps: 94, totalValidated1stBatch: 150, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 0, bufferForRequest: 0, bufferActive4psValidated: 0, bufferValidatedNon4ps: 0, totalValidatedBuffer: 0, overallTotalValidated: 150, variance: 96, systemResult: 157, systemVariance: 89 },
-    { municipality: "VALDERRAMA", target: 111, existingWGP: 5, unlocated: 0, ineligible: 0, active4psRefused: 46, forBufferRequest: 0, active4psValidated: 0, validatedNon4ps: 60, totalValidated1stBatch: 60, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 0, bufferForRequest: 0, bufferActive4psValidated: 0, bufferValidatedNon4ps: 0, totalValidatedBuffer: 0, overallTotalValidated: 60, variance: 51, systemResult: 66, systemVariance: 45 },
+    { municipality: "ANINI-Y", target: 20, systemResult: 21, systemVariance: -1 },
+    { municipality: "BARBAZA", target: 28, systemResult: 13, systemVariance: 15 },
+    { municipality: "BUGASONG", target: 162, systemResult: 85, systemVariance: 77 },
+    { municipality: "CALUYA", target: 227, systemResult: 0, systemVariance: 227 },
+    { municipality: "CULASI", target: 170, systemResult: 159, systemVariance: 11 },
+    { municipality: "HAMTIC", target: 93, systemResult: 74, systemVariance: 19 },
+    { municipality: "LAUA-AN", target: 51, systemResult: 33, systemVariance: 18 },
+    { municipality: "LIBERTAD", target: 24, systemResult: 20, systemVariance: 4 },
+    { municipality: "PANDAN", target: 24, systemResult: 21, systemVariance: 3 },
+    { municipality: "PATNONGON", target: 122, systemResult: 110, systemVariance: 12 },
+    { municipality: "SAN JOSE (Capital)", target: 153, systemResult: 96, systemVariance: 57 },
+    { municipality: "SAN REMIGIO", target: 743, systemResult: 345, systemVariance: 398 },
+    { municipality: "SEBASTE", target: 20, systemResult: 21, systemVariance: -1 },
+    { municipality: "SIBALOM", target: 91, systemResult: 82, systemVariance: 9 },
+    { municipality: "TIBIAO", target: 246, systemResult: 157, systemVariance: 89 },
+    { municipality: "VALDERRAMA", target: 111, systemResult: 66, systemVariance: 45 },
   ],
-  grandTotal: { municipality: "Grand Total", target: 2285, existingWGP: 112, unlocated: 48, ineligible: 2, active4psRefused: 339, forBufferRequest: 0, active4psValidated: 262, validatedNon4ps: 895, totalValidated1stBatch: 1157, bufferExistingWGP: 9, bufferUnlocated: 2, bufferIneligible: 0, bufferActive4psRefused: 24, bufferForRequest: 0, bufferActive4psValidated: 25, bufferValidatedNon4ps: 66, totalValidatedBuffer: 91, overallTotalValidated: 1248, variance: 1037, systemResult: 1303, systemVariance: 982 }
+  grandTotal: { municipality: "Grand Total", target: 2285, systemResult: 1303, systemVariance: 982 }
 };
 
-// Sample data for Capiz (based on similar structure)
 export const capizData: ProvinceData = {
   name: "Capiz",
   municipalities: [
-    { municipality: "CUARTERO", target: 45, existingWGP: 2, unlocated: 1, ineligible: 0, active4psRefused: 8, forBufferRequest: 0, active4psValidated: 15, validatedNon4ps: 12, totalValidated1stBatch: 27, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 0, bufferForRequest: 0, bufferActive4psValidated: 3, bufferValidatedNon4ps: 5, totalValidatedBuffer: 8, overallTotalValidated: 35, variance: 10, systemResult: 38, systemVariance: 7 },
-    { municipality: "DAO", target: 68, existingWGP: 4, unlocated: 2, ineligible: 0, active4psRefused: 12, forBufferRequest: 0, active4psValidated: 22, validatedNon4ps: 18, totalValidated1stBatch: 40, bufferExistingWGP: 1, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 2, bufferForRequest: 0, bufferActive4psValidated: 5, bufferValidatedNon4ps: 8, totalValidatedBuffer: 13, overallTotalValidated: 53, variance: 15, systemResult: 55, systemVariance: 13 },
-    { municipality: "DUMALAG", target: 52, existingWGP: 3, unlocated: 1, ineligible: 0, active4psRefused: 10, forBufferRequest: 0, active4psValidated: 18, validatedNon4ps: 15, totalValidated1stBatch: 33, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 1, bufferForRequest: 0, bufferActive4psValidated: 4, bufferValidatedNon4ps: 6, totalValidatedBuffer: 10, overallTotalValidated: 43, variance: 9, systemResult: 45, systemVariance: 7 },
-    { municipality: "DUMARAO", target: 85, existingWGP: 5, unlocated: 3, ineligible: 0, active4psRefused: 15, forBufferRequest: 0, active4psValidated: 28, validatedNon4ps: 22, totalValidated1stBatch: 50, bufferExistingWGP: 1, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 3, bufferForRequest: 0, bufferActive4psValidated: 6, bufferValidatedNon4ps: 10, totalValidatedBuffer: 16, overallTotalValidated: 66, variance: 19, systemResult: 70, systemVariance: 15 },
-    { municipality: "IVISAN", target: 38, existingWGP: 2, unlocated: 1, ineligible: 0, active4psRefused: 6, forBufferRequest: 0, active4psValidated: 12, validatedNon4ps: 10, totalValidated1stBatch: 22, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 1, bufferForRequest: 0, bufferActive4psValidated: 3, bufferValidatedNon4ps: 4, totalValidatedBuffer: 7, overallTotalValidated: 29, variance: 9, systemResult: 30, systemVariance: 8 },
-    { municipality: "JAMINDAN", target: 72, existingWGP: 4, unlocated: 2, ineligible: 0, active4psRefused: 14, forBufferRequest: 0, active4psValidated: 25, validatedNon4ps: 20, totalValidated1stBatch: 45, bufferExistingWGP: 1, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 2, bufferForRequest: 0, bufferActive4psValidated: 5, bufferValidatedNon4ps: 7, totalValidatedBuffer: 12, overallTotalValidated: 57, variance: 15, systemResult: 60, systemVariance: 12 },
-    { municipality: "MAAYON", target: 55, existingWGP: 3, unlocated: 1, ineligible: 0, active4psRefused: 10, forBufferRequest: 0, active4psValidated: 18, validatedNon4ps: 15, totalValidated1stBatch: 33, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 1, bufferForRequest: 0, bufferActive4psValidated: 4, bufferValidatedNon4ps: 6, totalValidatedBuffer: 10, overallTotalValidated: 43, variance: 12, systemResult: 45, systemVariance: 10 },
-    { municipality: "MAMBUSAO", target: 62, existingWGP: 4, unlocated: 2, ineligible: 0, active4psRefused: 12, forBufferRequest: 0, active4psValidated: 20, validatedNon4ps: 16, totalValidated1stBatch: 36, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 2, bufferForRequest: 0, bufferActive4psValidated: 4, bufferValidatedNon4ps: 7, totalValidatedBuffer: 11, overallTotalValidated: 47, variance: 15, systemResult: 50, systemVariance: 12 },
-    { municipality: "PANAY", target: 48, existingWGP: 2, unlocated: 1, ineligible: 0, active4psRefused: 8, forBufferRequest: 0, active4psValidated: 16, validatedNon4ps: 14, totalValidated1stBatch: 30, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 1, bufferForRequest: 0, bufferActive4psValidated: 3, bufferValidatedNon4ps: 5, totalValidatedBuffer: 8, overallTotalValidated: 38, variance: 10, systemResult: 40, systemVariance: 8 },
-    { municipality: "PANITAN", target: 58, existingWGP: 3, unlocated: 2, ineligible: 0, active4psRefused: 11, forBufferRequest: 0, active4psValidated: 19, validatedNon4ps: 16, totalValidated1stBatch: 35, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 1, bufferForRequest: 0, bufferActive4psValidated: 4, bufferValidatedNon4ps: 6, totalValidatedBuffer: 10, overallTotalValidated: 45, variance: 13, systemResult: 48, systemVariance: 10 },
-    { municipality: "PILAR", target: 42, existingWGP: 2, unlocated: 1, ineligible: 0, active4psRefused: 7, forBufferRequest: 0, active4psValidated: 14, validatedNon4ps: 12, totalValidated1stBatch: 26, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 1, bufferForRequest: 0, bufferActive4psValidated: 3, bufferValidatedNon4ps: 4, totalValidatedBuffer: 7, overallTotalValidated: 33, variance: 9, systemResult: 35, systemVariance: 7 },
-    { municipality: "PONTEVEDRA", target: 65, existingWGP: 4, unlocated: 2, ineligible: 0, active4psRefused: 13, forBufferRequest: 0, active4psValidated: 22, validatedNon4ps: 18, totalValidated1stBatch: 40, bufferExistingWGP: 1, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 2, bufferForRequest: 0, bufferActive4psValidated: 5, bufferValidatedNon4ps: 8, totalValidatedBuffer: 13, overallTotalValidated: 53, variance: 12, systemResult: 56, systemVariance: 9 },
-    { municipality: "PRESIDENT ROXAS", target: 78, existingWGP: 5, unlocated: 2, ineligible: 0, active4psRefused: 15, forBufferRequest: 0, active4psValidated: 26, validatedNon4ps: 22, totalValidated1stBatch: 48, bufferExistingWGP: 1, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 2, bufferForRequest: 0, bufferActive4psValidated: 6, bufferValidatedNon4ps: 9, totalValidatedBuffer: 15, overallTotalValidated: 63, variance: 15, systemResult: 67, systemVariance: 11 },
-    { municipality: "ROXAS CITY (Capital)", target: 125, existingWGP: 8, unlocated: 4, ineligible: 0, active4psRefused: 25, forBufferRequest: 0, active4psValidated: 42, validatedNon4ps: 35, totalValidated1stBatch: 77, bufferExistingWGP: 2, bufferUnlocated: 1, bufferIneligible: 0, bufferActive4psRefused: 4, bufferForRequest: 0, bufferActive4psValidated: 10, bufferValidatedNon4ps: 15, totalValidatedBuffer: 25, overallTotalValidated: 102, variance: 23, systemResult: 108, systemVariance: 17 },
-    { municipality: "SAPIAN", target: 35, existingWGP: 2, unlocated: 1, ineligible: 0, active4psRefused: 5, forBufferRequest: 0, active4psValidated: 12, validatedNon4ps: 10, totalValidated1stBatch: 22, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 1, bufferForRequest: 0, bufferActive4psValidated: 2, bufferValidatedNon4ps: 4, totalValidatedBuffer: 6, overallTotalValidated: 28, variance: 7, systemResult: 30, systemVariance: 5 },
-    { municipality: "SIGMA", target: 40, existingWGP: 2, unlocated: 1, ineligible: 0, active4psRefused: 6, forBufferRequest: 0, active4psValidated: 14, validatedNon4ps: 12, totalValidated1stBatch: 26, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 1, bufferForRequest: 0, bufferActive4psValidated: 3, bufferValidatedNon4ps: 4, totalValidatedBuffer: 7, overallTotalValidated: 33, variance: 7, systemResult: 35, systemVariance: 5 },
-    { municipality: "TAPAZ", target: 95, existingWGP: 6, unlocated: 3, ineligible: 0, active4psRefused: 18, forBufferRequest: 0, active4psValidated: 32, validatedNon4ps: 28, totalValidated1stBatch: 60, bufferExistingWGP: 1, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 3, bufferForRequest: 0, bufferActive4psValidated: 8, bufferValidatedNon4ps: 12, totalValidatedBuffer: 20, overallTotalValidated: 80, variance: 15, systemResult: 85, systemVariance: 10 },
+    { municipality: "CUARTERO", target: 45, systemResult: 38, systemVariance: 7 },
+    { municipality: "DAO", target: 68, systemResult: 55, systemVariance: 13 },
+    { municipality: "DUMALAG", target: 52, systemResult: 45, systemVariance: 7 },
+    { municipality: "DUMARAO", target: 85, systemResult: 70, systemVariance: 15 },
+    { municipality: "IVISAN", target: 38, systemResult: 30, systemVariance: 8 },
+    { municipality: "JAMINDAN", target: 72, systemResult: 60, systemVariance: 12 },
+    { municipality: "MAAYON", target: 55, systemResult: 45, systemVariance: 10 },
+    { municipality: "MAMBUSAO", target: 62, systemResult: 50, systemVariance: 12 },
+    { municipality: "PANAY", target: 48, systemResult: 40, systemVariance: 8 },
+    { municipality: "PANITAN", target: 58, systemResult: 48, systemVariance: 10 },
+    { municipality: "PILAR", target: 42, systemResult: 35, systemVariance: 7 },
+    { municipality: "PONTEVEDRA", target: 65, systemResult: 56, systemVariance: 9 },
+    { municipality: "PRESIDENT ROXAS", target: 78, systemResult: 67, systemVariance: 11 },
+    { municipality: "ROXAS CITY (Capital)", target: 125, systemResult: 108, systemVariance: 17 },
+    { municipality: "SAPIAN", target: 35, systemResult: 30, systemVariance: 5 },
+    { municipality: "SIGMA", target: 40, systemResult: 35, systemVariance: 5 },
+    { municipality: "TAPAZ", target: 95, systemResult: 85, systemVariance: 10 },
   ],
-  grandTotal: { municipality: "Grand Total", target: 1063, existingWGP: 61, unlocated: 30, ineligible: 0, active4psRefused: 195, forBufferRequest: 0, active4psValidated: 355, validatedNon4ps: 295, totalValidated1stBatch: 650, bufferExistingWGP: 8, bufferUnlocated: 1, bufferIneligible: 0, bufferActive4psRefused: 28, bufferForRequest: 0, bufferActive4psValidated: 78, bufferValidatedNon4ps: 120, totalValidatedBuffer: 198, overallTotalValidated: 848, variance: 215, systemResult: 897, systemVariance: 166 }
+  grandTotal: { municipality: "Grand Total", target: 1063, systemResult: 897, systemVariance: 166 }
 };
 
-// Sample data for Iloilo
 export const iloiloData: ProvinceData = {
   name: "Iloilo",
   municipalities: [
-    { municipality: "AJUY", target: 180, existingWGP: 12, unlocated: 5, ineligible: 1, active4psRefused: 35, forBufferRequest: 0, active4psValidated: 55, validatedNon4ps: 45, totalValidated1stBatch: 100, bufferExistingWGP: 2, bufferUnlocated: 1, bufferIneligible: 0, bufferActive4psRefused: 5, bufferForRequest: 0, bufferActive4psValidated: 12, bufferValidatedNon4ps: 18, totalValidatedBuffer: 30, overallTotalValidated: 130, variance: 50, systemResult: 140, systemVariance: 40 },
-    { municipality: "ALIMODIAN", target: 145, existingWGP: 10, unlocated: 4, ineligible: 0, active4psRefused: 28, forBufferRequest: 0, active4psValidated: 45, validatedNon4ps: 38, totalValidated1stBatch: 83, bufferExistingWGP: 1, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 4, bufferForRequest: 0, bufferActive4psValidated: 10, bufferValidatedNon4ps: 15, totalValidatedBuffer: 25, overallTotalValidated: 108, variance: 37, systemResult: 115, systemVariance: 30 },
-    { municipality: "ANILAO", target: 92, existingWGP: 6, unlocated: 3, ineligible: 0, active4psRefused: 18, forBufferRequest: 0, active4psValidated: 30, validatedNon4ps: 25, totalValidated1stBatch: 55, bufferExistingWGP: 1, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 2, bufferForRequest: 0, bufferActive4psValidated: 6, bufferValidatedNon4ps: 9, totalValidatedBuffer: 15, overallTotalValidated: 70, variance: 22, systemResult: 75, systemVariance: 17 },
-    { municipality: "BADIANGAN", target: 78, existingWGP: 5, unlocated: 2, ineligible: 0, active4psRefused: 15, forBufferRequest: 0, active4psValidated: 25, validatedNon4ps: 22, totalValidated1stBatch: 47, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 2, bufferForRequest: 0, bufferActive4psValidated: 5, bufferValidatedNon4ps: 8, totalValidatedBuffer: 13, overallTotalValidated: 60, variance: 18, systemResult: 65, systemVariance: 13 },
-    { municipality: "BALASAN", target: 125, existingWGP: 8, unlocated: 4, ineligible: 0, active4psRefused: 25, forBufferRequest: 0, active4psValidated: 40, validatedNon4ps: 35, totalValidated1stBatch: 75, bufferExistingWGP: 1, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 3, bufferForRequest: 0, bufferActive4psValidated: 8, bufferValidatedNon4ps: 12, totalValidatedBuffer: 20, overallTotalValidated: 95, variance: 30, systemResult: 100, systemVariance: 25 },
-    { municipality: "BANATE", target: 88, existingWGP: 6, unlocated: 3, ineligible: 0, active4psRefused: 17, forBufferRequest: 0, active4psValidated: 28, validatedNon4ps: 24, totalValidated1stBatch: 52, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 2, bufferForRequest: 0, bufferActive4psValidated: 6, bufferValidatedNon4ps: 9, totalValidatedBuffer: 15, overallTotalValidated: 67, variance: 21, systemResult: 72, systemVariance: 16 },
-    { municipality: "BAROTAC NUEVO", target: 135, existingWGP: 9, unlocated: 4, ineligible: 0, active4psRefused: 26, forBufferRequest: 0, active4psValidated: 45, validatedNon4ps: 38, totalValidated1stBatch: 83, bufferExistingWGP: 1, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 4, bufferForRequest: 0, bufferActive4psValidated: 9, bufferValidatedNon4ps: 14, totalValidatedBuffer: 23, overallTotalValidated: 106, variance: 29, systemResult: 112, systemVariance: 23 },
-    { municipality: "BAROTAC VIEJO", target: 105, existingWGP: 7, unlocated: 3, ineligible: 0, active4psRefused: 20, forBufferRequest: 0, active4psValidated: 35, validatedNon4ps: 30, totalValidated1stBatch: 65, bufferExistingWGP: 1, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 3, bufferForRequest: 0, bufferActive4psValidated: 7, bufferValidatedNon4ps: 11, totalValidatedBuffer: 18, overallTotalValidated: 83, variance: 22, systemResult: 88, systemVariance: 17 },
-    { municipality: "BINGAWAN", target: 55, existingWGP: 3, unlocated: 2, ineligible: 0, active4psRefused: 10, forBufferRequest: 0, active4psValidated: 18, validatedNon4ps: 15, totalValidated1stBatch: 33, bufferExistingWGP: 0, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 1, bufferForRequest: 0, bufferActive4psValidated: 4, bufferValidatedNon4ps: 6, totalValidatedBuffer: 10, overallTotalValidated: 43, variance: 12, systemResult: 45, systemVariance: 10 },
-    { municipality: "CABATUAN", target: 168, existingWGP: 11, unlocated: 5, ineligible: 0, active4psRefused: 32, forBufferRequest: 0, active4psValidated: 55, validatedNon4ps: 48, totalValidated1stBatch: 103, bufferExistingWGP: 2, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 5, bufferForRequest: 0, bufferActive4psValidated: 11, bufferValidatedNon4ps: 17, totalValidatedBuffer: 28, overallTotalValidated: 131, variance: 37, systemResult: 138, systemVariance: 30 },
-    { municipality: "CALINOG", target: 195, existingWGP: 13, unlocated: 6, ineligible: 0, active4psRefused: 38, forBufferRequest: 0, active4psValidated: 65, validatedNon4ps: 55, totalValidated1stBatch: 120, bufferExistingWGP: 2, bufferUnlocated: 1, bufferIneligible: 0, bufferActive4psRefused: 6, bufferForRequest: 0, bufferActive4psValidated: 13, bufferValidatedNon4ps: 20, totalValidatedBuffer: 33, overallTotalValidated: 153, variance: 42, systemResult: 162, systemVariance: 33 },
-    { municipality: "CARLES", target: 142, existingWGP: 9, unlocated: 4, ineligible: 0, active4psRefused: 28, forBufferRequest: 0, active4psValidated: 48, validatedNon4ps: 40, totalValidated1stBatch: 88, bufferExistingWGP: 1, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 4, bufferForRequest: 0, bufferActive4psValidated: 10, bufferValidatedNon4ps: 15, totalValidatedBuffer: 25, overallTotalValidated: 113, variance: 29, systemResult: 120, systemVariance: 22 },
-    { municipality: "CONCEPCION", target: 112, existingWGP: 7, unlocated: 3, ineligible: 0, active4psRefused: 22, forBufferRequest: 0, active4psValidated: 38, validatedNon4ps: 32, totalValidated1stBatch: 70, bufferExistingWGP: 1, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 3, bufferForRequest: 0, bufferActive4psValidated: 8, bufferValidatedNon4ps: 12, totalValidatedBuffer: 20, overallTotalValidated: 90, variance: 22, systemResult: 95, systemVariance: 17 },
-    { municipality: "DINGLE", target: 98, existingWGP: 6, unlocated: 3, ineligible: 0, active4psRefused: 19, forBufferRequest: 0, active4psValidated: 32, validatedNon4ps: 28, totalValidated1stBatch: 60, bufferExistingWGP: 1, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 3, bufferForRequest: 0, bufferActive4psValidated: 7, bufferValidatedNon4ps: 10, totalValidatedBuffer: 17, overallTotalValidated: 77, variance: 21, systemResult: 82, systemVariance: 16 },
-    { municipality: "DUEÑAS", target: 85, existingWGP: 5, unlocated: 2, ineligible: 0, active4psRefused: 16, forBufferRequest: 0, active4psValidated: 28, validatedNon4ps: 24, totalValidated1stBatch: 52, bufferExistingWGP: 1, bufferUnlocated: 0, bufferIneligible: 0, bufferActive4psRefused: 2, bufferForRequest: 0, bufferActive4psValidated: 6, bufferValidatedNon4ps: 9, totalValidatedBuffer: 15, overallTotalValidated: 67, variance: 18, systemResult: 72, systemVariance: 13 },
-    { municipality: "ILOILO CITY (Capital)", target: 320, existingWGP: 22, unlocated: 10, ineligible: 2, active4psRefused: 65, forBufferRequest: 0, active4psValidated: 105, validatedNon4ps: 88, totalValidated1stBatch: 193, bufferExistingWGP: 4, bufferUnlocated: 2, bufferIneligible: 0, bufferActive4psRefused: 10, bufferForRequest: 0, bufferActive4psValidated: 22, bufferValidatedNon4ps: 35, totalValidatedBuffer: 57, overallTotalValidated: 250, variance: 70, systemResult: 268, systemVariance: 52 },
+    { municipality: "AJUY", target: 180, systemResult: 140, systemVariance: 40 },
+    { municipality: "ALIMODIAN", target: 145, systemResult: 115, systemVariance: 30 },
+    { municipality: "ANILAO", target: 92, systemResult: 75, systemVariance: 17 },
+    { municipality: "BADIANGAN", target: 78, systemResult: 65, systemVariance: 13 },
+    { municipality: "BALASAN", target: 125, systemResult: 100, systemVariance: 25 },
+    { municipality: "BANATE", target: 88, systemResult: 72, systemVariance: 16 },
+    { municipality: "BAROTAC NUEVO", target: 135, systemResult: 112, systemVariance: 23 },
+    { municipality: "BAROTAC VIEJO", target: 105, systemResult: 88, systemVariance: 17 },
+    { municipality: "BINGAWAN", target: 55, systemResult: 45, systemVariance: 10 },
+    { municipality: "CABATUAN", target: 168, systemResult: 138, systemVariance: 30 },
+    { municipality: "CALINOG", target: 195, systemResult: 162, systemVariance: 33 },
+    { municipality: "CARLES", target: 142, systemResult: 120, systemVariance: 22 },
+    { municipality: "CONCEPCION", target: 112, systemResult: 95, systemVariance: 17 },
+    { municipality: "DINGLE", target: 98, systemResult: 82, systemVariance: 16 },
+    { municipality: "DUEÑAS", target: 85, systemResult: 72, systemVariance: 13 },
+    { municipality: "ILOILO CITY (Capital)", target: 320, systemResult: 268, systemVariance: 52 },
   ],
-  grandTotal: { municipality: "Grand Total", target: 2123, existingWGP: 139, unlocated: 63, ineligible: 3, active4psRefused: 414, forBufferRequest: 0, active4psValidated: 692, validatedNon4ps: 587, totalValidated1stBatch: 1279, bufferExistingWGP: 19, bufferUnlocated: 4, bufferIneligible: 0, bufferActive4psRefused: 59, bufferForRequest: 0, bufferActive4psValidated: 144, bufferValidatedNon4ps: 220, totalValidatedBuffer: 364, overallTotalValidated: 1643, variance: 480, systemResult: 1749, systemVariance: 374 }
+  grandTotal: { municipality: "Grand Total", target: 2123, systemResult: 1749, systemVariance: 374 }
 };
 
-// Combined provinces summary data
 export const provincesData: ProvinceData = {
   name: "All Provinces",
   municipalities: [
-    { municipality: "Antique", target: 2285, existingWGP: 112, unlocated: 48, ineligible: 2, active4psRefused: 339, forBufferRequest: 0, active4psValidated: 262, validatedNon4ps: 895, totalValidated1stBatch: 1157, bufferExistingWGP: 9, bufferUnlocated: 2, bufferIneligible: 0, bufferActive4psRefused: 24, bufferForRequest: 0, bufferActive4psValidated: 25, bufferValidatedNon4ps: 66, totalValidatedBuffer: 91, overallTotalValidated: 1248, variance: 1037, systemResult: 1303, systemVariance: 982 },
-    { municipality: "Capiz", target: 1063, existingWGP: 61, unlocated: 30, ineligible: 0, active4psRefused: 195, forBufferRequest: 0, active4psValidated: 355, validatedNon4ps: 295, totalValidated1stBatch: 650, bufferExistingWGP: 8, bufferUnlocated: 1, bufferIneligible: 0, bufferActive4psRefused: 28, bufferForRequest: 0, bufferActive4psValidated: 78, bufferValidatedNon4ps: 120, totalValidatedBuffer: 198, overallTotalValidated: 848, variance: 215, systemResult: 897, systemVariance: 166 },
-    { municipality: "Iloilo", target: 2123, existingWGP: 139, unlocated: 63, ineligible: 3, active4psRefused: 414, forBufferRequest: 0, active4psValidated: 692, validatedNon4ps: 587, totalValidated1stBatch: 1279, bufferExistingWGP: 19, bufferUnlocated: 4, bufferIneligible: 0, bufferActive4psRefused: 59, bufferForRequest: 0, bufferActive4psValidated: 144, bufferValidatedNon4ps: 220, totalValidatedBuffer: 364, overallTotalValidated: 1643, variance: 480, systemResult: 1749, systemVariance: 374 },
+    { municipality: "Antique", target: 2285, systemResult: 1303, systemVariance: 982 },
+    { municipality: "Capiz", target: 1063, systemResult: 897, systemVariance: 166 },
+    { municipality: "Iloilo", target: 2123, systemResult: 1749, systemVariance: 374 },
   ],
-  grandTotal: { municipality: "Grand Total", target: 5471, existingWGP: 312, unlocated: 141, ineligible: 5, active4psRefused: 948, forBufferRequest: 0, active4psValidated: 1309, validatedNon4ps: 1777, totalValidated1stBatch: 3086, bufferExistingWGP: 36, bufferUnlocated: 7, bufferIneligible: 0, bufferActive4psRefused: 111, bufferForRequest: 0, bufferActive4psValidated: 247, bufferValidatedNon4ps: 406, totalValidatedBuffer: 653, overallTotalValidated: 3739, variance: 1732, systemResult: 3949, systemVariance: 1522 }
+  grandTotal: { municipality: "Grand Total", target: 5471, systemResult: 3949, systemVariance: 1522 }
 };
 
 export const allProvinces = {

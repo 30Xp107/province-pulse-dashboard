@@ -13,9 +13,9 @@ interface ProvinceCardProps {
 export function ProvinceCard({ data, onClick, isSelected, delay = 0 }: ProvinceCardProps) {
   const { grandTotal } = data;
   const progressPercentage = Math.round(
-    (grandTotal.overallTotalValidated / grandTotal.target) * 100
+    (grandTotal.systemResult / grandTotal.target) * 100
   );
-  const isOnTrack = grandTotal.variance <= grandTotal.target * 0.2;
+  const isOnTrack = grandTotal.systemVariance <= grandTotal.target * 0.2;
 
   return (
     <div
@@ -66,7 +66,7 @@ export function ProvinceCard({ data, onClick, isSelected, delay = 0 }: ProvinceC
         </div>
         <Progress value={progressPercentage} className="h-2" />
 
-        <div className="grid grid-cols-2 gap-4 pt-2">
+        <div className="grid grid-cols-3 gap-4 pt-2">
           <div className="space-y-1">
             <p className="text-xs text-muted-foreground">Target</p>
             <p className="text-lg font-bold text-foreground">
@@ -74,21 +74,18 @@ export function ProvinceCard({ data, onClick, isSelected, delay = 0 }: ProvinceC
             </p>
           </div>
           <div className="space-y-1">
-            <p className="text-xs text-muted-foreground">Validated</p>
+            <p className="text-xs text-muted-foreground">System Result</p>
             <p className="text-lg font-bold text-primary">
-              {grandTotal.overallTotalValidated.toLocaleString()}
+              {grandTotal.systemResult.toLocaleString()}
             </p>
           </div>
           <div className="space-y-1">
-            <p className="text-xs text-muted-foreground">1st Batch</p>
-            <p className="text-sm font-medium text-foreground">
-              {grandTotal.totalValidated1stBatch.toLocaleString()}
-            </p>
-          </div>
-          <div className="space-y-1">
-            <p className="text-xs text-muted-foreground">Buffer</p>
-            <p className="text-sm font-medium text-foreground">
-              {grandTotal.totalValidatedBuffer.toLocaleString()}
+            <p className="text-xs text-muted-foreground">Variance</p>
+            <p className={cn(
+              "text-lg font-bold",
+              grandTotal.systemVariance <= 0 ? "text-success" : "text-warning"
+            )}>
+              {grandTotal.systemVariance.toLocaleString()}
             </p>
           </div>
         </div>

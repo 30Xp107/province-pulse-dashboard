@@ -5,15 +5,13 @@ import { ProvinceCard } from "@/components/dashboard/ProvinceCard";
 import { MunicipalityTable } from "@/components/dashboard/MunicipalityTable";
 import { ValidationChart } from "@/components/dashboard/ValidationChart";
 import {
-  allProvinces,
   provincesData,
   antiqueData,
   capizData,
   iloiloData,
-  ProvinceData,
 } from "@/data/provinceData";
-import { Target, CheckCircle2, AlertTriangle, Users, TrendingUp, Layers } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Target, TrendingUp, AlertTriangle } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const provinceOptions = [
   { key: "provinces", label: "All Provinces", data: provincesData },
@@ -29,7 +27,7 @@ const Index = () => {
   const { grandTotal } = currentData;
 
   const progressPercentage = Math.round(
-    (grandTotal.overallTotalValidated / grandTotal.target) * 100
+    (grandTotal.systemResult / grandTotal.target) * 100
   );
 
   return (
@@ -52,21 +50,21 @@ const Index = () => {
           </TabsList>
         </Tabs>
 
-        {/* Stats Overview */}
-        <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {/* Stats Overview - Focus on Target, System Result, System Variance */}
+        <section className="grid gap-4 md:grid-cols-3">
           <StatCard
-            title="Target Beneficiaries"
+            title="Target"
             value={grandTotal.target}
-            subtitle="Total target for validation"
+            subtitle="Total target beneficiaries"
             icon={Target}
             variant="info"
             delay={0}
           />
           <StatCard
-            title="Total Validated"
-            value={grandTotal.overallTotalValidated}
-            subtitle={`${progressPercentage}% of target`}
-            icon={CheckCircle2}
+            title="System Result"
+            value={grandTotal.systemResult}
+            subtitle={`${progressPercentage}% of target achieved`}
+            icon={TrendingUp}
             variant="primary"
             trend={{
               value: progressPercentage,
@@ -75,48 +73,12 @@ const Index = () => {
             delay={100}
           />
           <StatCard
-            title="Remaining Variance"
-            value={grandTotal.variance}
-            subtitle="Yet to be validated"
+            title="System Variance"
+            value={grandTotal.systemVariance}
+            subtitle="Remaining to achieve target"
             icon={AlertTriangle}
             variant="warning"
             delay={200}
-          />
-          <StatCard
-            title="System Result"
-            value={grandTotal.systemResult}
-            subtitle={`Variance: ${grandTotal.systemVariance}`}
-            icon={TrendingUp}
-            variant="success"
-            delay={300}
-          />
-        </section>
-
-        {/* Secondary Stats */}
-        <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <StatCard
-            title="1st Batch Validated"
-            value={grandTotal.totalValidated1stBatch}
-            icon={Users}
-            delay={400}
-          />
-          <StatCard
-            title="Buffer List Validated"
-            value={grandTotal.totalValidatedBuffer}
-            icon={Layers}
-            delay={500}
-          />
-          <StatCard
-            title="Existing WGP"
-            value={grandTotal.existingWGP}
-            icon={Users}
-            delay={600}
-          />
-          <StatCard
-            title="4Ps Refused Validation"
-            value={grandTotal.active4psRefused}
-            icon={AlertTriangle}
-            delay={700}
           />
         </section>
 

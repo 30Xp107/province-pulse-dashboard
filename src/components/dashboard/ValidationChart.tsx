@@ -18,38 +18,25 @@ interface ValidationChartProps {
   type?: "bar" | "pie";
 }
 
-const COLORS = ["hsl(166, 72%, 40%)", "hsl(38, 92%, 50%)", "hsl(217, 91%, 60%)", "hsl(280, 65%, 60%)", "hsl(340, 75%, 55%)"];
+const COLORS = ["hsl(166, 72%, 40%)", "hsl(38, 92%, 50%)"];
 
 export function ValidationChart({ data, type = "bar" }: ValidationChartProps) {
-  const chartData = data.municipalities.slice(0, 10).map((m) => ({
+  const chartData = data.municipalities.map((m) => ({
     name: m.municipality.length > 12 ? m.municipality.substring(0, 12) + "..." : m.municipality,
     fullName: m.municipality,
     Target: m.target,
-    "1st Batch": m.totalValidated1stBatch,
-    Buffer: m.totalValidatedBuffer,
-    Validated: m.overallTotalValidated,
+    "System Result": m.systemResult,
+    "System Variance": m.systemVariance,
   }));
 
   const pieData = [
     {
-      name: "1st Batch Validated",
-      value: data.grandTotal.totalValidated1stBatch,
+      name: "System Result",
+      value: data.grandTotal.systemResult,
     },
     {
-      name: "Buffer Validated",
-      value: data.grandTotal.totalValidatedBuffer,
-    },
-    {
-      name: "Existing WGP",
-      value: data.grandTotal.existingWGP,
-    },
-    {
-      name: "4Ps Refused",
-      value: data.grandTotal.active4psRefused,
-    },
-    {
-      name: "Remaining Variance",
-      value: Math.max(0, data.grandTotal.variance - data.grandTotal.existingWGP - data.grandTotal.active4psRefused),
+      name: "System Variance",
+      value: data.grandTotal.systemVariance,
     },
   ];
 
@@ -57,10 +44,10 @@ export function ValidationChart({ data, type = "bar" }: ValidationChartProps) {
     return (
       <div className="rounded-xl border bg-card p-6 shadow-sm animate-fade-in">
         <h3 className="text-lg font-semibold text-foreground mb-2">
-          Validation Distribution
+          Target Completion
         </h3>
         <p className="text-sm text-muted-foreground mb-4">
-          Breakdown of validation status
+          System Result vs Remaining Variance
         </p>
         <div className="h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
@@ -69,9 +56,9 @@ export function ValidationChart({ data, type = "bar" }: ValidationChartProps) {
                 data={pieData}
                 cx="50%"
                 cy="50%"
-                innerRadius={60}
-                outerRadius={100}
-                paddingAngle={2}
+                innerRadius={70}
+                outerRadius={110}
+                paddingAngle={3}
                 dataKey="value"
                 label={({ name, percent }) =>
                   `${name}: ${(percent * 100).toFixed(0)}%`
@@ -97,6 +84,20 @@ export function ValidationChart({ data, type = "bar" }: ValidationChartProps) {
             </PieChart>
           </ResponsiveContainer>
         </div>
+        <div className="mt-4 grid grid-cols-2 gap-4 text-center">
+          <div className="p-3 rounded-lg bg-primary/10">
+            <p className="text-2xl font-bold text-primary">
+              {Math.round((data.grandTotal.systemResult / data.grandTotal.target) * 100)}%
+            </p>
+            <p className="text-xs text-muted-foreground">Achievement Rate</p>
+          </div>
+          <div className="p-3 rounded-lg bg-warning/10">
+            <p className="text-2xl font-bold text-warning">
+              {data.grandTotal.systemVariance.toLocaleString()}
+            </p>
+            <p className="text-xs text-muted-foreground">Remaining</p>
+          </div>
+        </div>
       </div>
     );
   }
@@ -104,10 +105,10 @@ export function ValidationChart({ data, type = "bar" }: ValidationChartProps) {
   return (
     <div className="rounded-xl border bg-card p-6 shadow-sm animate-fade-in">
       <h3 className="text-lg font-semibold text-foreground mb-2">
-        Validation by Municipality
+        Target vs System Result
       </h3>
       <p className="text-sm text-muted-foreground mb-4">
-        Top 10 municipalities comparison
+        Comparison by municipality
       </p>
       <div className="h-[350px]">
         <ResponsiveContainer width="100%" height="100%">
@@ -137,7 +138,7 @@ export function ValidationChart({ data, type = "bar" }: ValidationChartProps) {
             />
             <Legend wrapperStyle={{ paddingTop: "20px" }} />
             <Bar dataKey="Target" fill="hsl(var(--muted-foreground))" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="Validated" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="System Result" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
