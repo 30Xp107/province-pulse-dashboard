@@ -8,9 +8,9 @@ const REFRESH_INTERVAL = 30000; // 30 seconds
 // To find a GID: Click on each sheet tab and look at the URL for "gid=XXXX"
 export const PROVINCE_SHEETS = {
   iloilo: { name: 'Iloilo', gid: 0 },
-  antique: { name: 'Antique', gid: 1674997842 },
-  capiz: { name: 'Capiz', gid: 1139498498 },
-  nir: { name: 'NIR (Occidental)', gid: 1854432195 },
+  antique: { name: 'Antique', gid: 476288213 },
+  capiz: { name: 'Capiz', gid: 369889311 },
+  nir: { name: 'NIR (Occidental)', gid: 937247947 },
 } as const;
 
 export type ProvinceKey = keyof typeof PROVINCE_SHEETS;
