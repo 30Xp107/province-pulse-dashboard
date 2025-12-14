@@ -65,6 +65,13 @@ async function fetchSheetData(gid: number, provinceName: string): Promise<Provin
   const csvText = await response.text();
   const lines = csvText.split('\n').filter(line => line.trim());
   
+  // Check header to determine column structure
+  const headerLine = lines[0] || '';
+  const headerColumns = parseCSVLine(headerLine);
+  
+  // Detect if sheet has TOTAL TARGET column (extended format) or simpler format
+  const hasTotalTarget = headerColumns.some(col => col.toUpperCase().includes('TOTAL TARGET'));
+  
   // Skip header row
   const dataLines = lines.slice(1);
   
@@ -73,12 +80,20 @@ async function fetchSheetData(gid: number, provinceName: string): Promise<Provin
   for (const line of dataLines) {
     const columns = parseCSVLine(line);
     
-    // Column mapping based on the sheet structure:
-    // 0: LGU, 7: TOTAL TARGET, 8: TOTAL VALIDATED, 9: TOTAL VARIANCE
     const lgu = columns[0]?.trim();
-    const target = parseNumber(columns[7] || '0');
-    const systemResult = parseNumber(columns[8] || '0');
-    const systemVariance = parseNumber(columns[9] || '0');
+    let target: number, systemResult: number, systemVariance: number;
+    
+    if (hasTotalTarget) {
+      // Extended format: 0: LGU, 7: TOTAL TARGET, 8: TOTAL VALIDATED, 9: TOTAL VARIANCE
+      target = parseNumber(columns[7] || '0');
+      systemResult = parseNumber(columns[8] || '0');
+      systemVariance = parseNumber(columns[9] || '0');
+    } else {
+      // Simple format: 0: LGU, 1: TARGET, 2: SYSTEM VALIDATED, 3: VARIANCE
+      target = parseNumber(columns[1] || '0');
+      systemResult = parseNumber(columns[2] || '0');
+      systemVariance = parseNumber(columns[3] || '0');
+    }
     
     // Skip empty rows, header rows, or total rows
     if (lgu && 
