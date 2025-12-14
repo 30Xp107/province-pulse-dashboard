@@ -23,7 +23,7 @@ export function MunicipalityTable({ data }: MunicipalityTableProps) {
           {data.name === "All Provinces" ? "Province" : data.name +" - Municipality"} Breakdown
         </h3>
         <p className="text-sm text-muted-foreground mt-1">
-          Target vs System Result by municipality
+          Target vs System Result by {data.name === "All Provinces" ? "province" : "municipality"}
         </p>
       </div>
       <div className="overflow-x-auto">
