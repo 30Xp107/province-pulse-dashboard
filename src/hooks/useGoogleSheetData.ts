@@ -4,13 +4,24 @@ import { ProvinceData, MunicipalityData } from '@/data/provinceData';
 const SHEET_ID = '1nnv1x3KqtD990twWE0YdSa-ym6scyOazezKOkm_jVBg';
 const REFRESH_INTERVAL = 30000; // 30 seconds
 
-// Sheet GIDs - you may need to update these based on your actual sheet
-const SHEET_GIDS = {
-  iloilo: 0, // Default sheet (gid=0)
-};
+// Sheet GIDs - Update these based on your actual Google Sheet tab GIDs
+// To find a GID: Click on each sheet tab and look at the URL for "gid=XXXX"
+export const PROVINCE_SHEETS = {
+  iloilo: { name: 'Iloilo', gid: 0 },
+  antique: { name: 'Antique', gid: 1674997842 },
+  capiz: { name: 'Capiz', gid: 1139498498 },
+  nir: { name: 'NIR (Occidental)', gid: 1854432195 },
+} as const;
+
+export type ProvinceKey = keyof typeof PROVINCE_SHEETS;
+
+interface AllProvincesData {
+  provinces: Record<ProvinceKey, ProvinceData>;
+  combined: ProvinceData;
+}
 
 interface UseGoogleSheetDataResult {
-  data: ProvinceData | null;
+  data: AllProvincesData | null;
   loading: boolean;
   error: string | null;
   lastUpdated: Date | null;
@@ -43,12 +54,12 @@ function parseNumber(value: string): number {
   return isNaN(num) ? 0 : num;
 }
 
-async function fetchSheetData(gid: number): Promise<MunicipalityData[]> {
+async function fetchSheetData(gid: number, provinceName: string): Promise<ProvinceData> {
   const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`;
   
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error(`Failed to fetch sheet data: ${response.statusText}`);
+    throw new Error(`Failed to fetch ${provinceName} data: ${response.statusText}`);
   }
   
   const csvText = await response.text();
@@ -69,8 +80,11 @@ async function fetchSheetData(gid: number): Promise<MunicipalityData[]> {
     const systemResult = parseNumber(columns[8] || '0');
     const systemVariance = parseNumber(columns[9] || '0');
     
-    // Skip empty rows or total rows
-    if (lgu && lgu.toUpperCase() !== 'TOTAL' && lgu.toUpperCase() !== 'LGU') {
+    // Skip empty rows, header rows, or total rows
+    if (lgu && 
+        lgu.toUpperCase() !== 'TOTAL' && 
+        lgu.toUpperCase() !== 'LGU' &&
+        !lgu.toUpperCase().includes('GRAND TOTAL')) {
       municipalities.push({
         municipality: lgu,
         target,
@@ -80,11 +94,7 @@ async function fetchSheetData(gid: number): Promise<MunicipalityData[]> {
     }
   }
   
-  return municipalities;
-}
-
-function calculateGrandTotal(municipalities: MunicipalityData[]): MunicipalityData {
-  return municipalities.reduce(
+  const grandTotal = municipalities.reduce(
     (acc, m) => ({
       municipality: 'Grand Total',
       target: acc.target + m.target,
@@ -93,10 +103,41 @@ function calculateGrandTotal(municipalities: MunicipalityData[]): MunicipalityDa
     }),
     { municipality: 'Grand Total', target: 0, systemResult: 0, systemVariance: 0 }
   );
+  
+  return {
+    name: provinceName,
+    municipalities,
+    grandTotal,
+  };
+}
+
+function calculateCombinedData(provinces: Record<ProvinceKey, ProvinceData>): ProvinceData {
+  const allMunicipalities: MunicipalityData[] = Object.entries(provinces).map(([key, province]) => ({
+    municipality: province.name,
+    target: province.grandTotal.target,
+    systemResult: province.grandTotal.systemResult,
+    systemVariance: province.grandTotal.systemVariance,
+  }));
+
+  const grandTotal = allMunicipalities.reduce(
+    (acc, m) => ({
+      municipality: 'Grand Total',
+      target: acc.target + m.target,
+      systemResult: acc.systemResult + m.systemResult,
+      systemVariance: acc.systemVariance + m.systemVariance,
+    }),
+    { municipality: 'Grand Total', target: 0, systemResult: 0, systemVariance: 0 }
+  );
+
+  return {
+    name: 'All Provinces',
+    municipalities: allMunicipalities,
+    grandTotal,
+  };
 }
 
 export function useGoogleSheetData(): UseGoogleSheetDataResult {
-  const [data, setData] = useState<ProvinceData | null>(null);
+  const [data, setData] = useState<AllProvincesData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
@@ -106,16 +147,39 @@ export function useGoogleSheetData(): UseGoogleSheetDataResult {
       setLoading(true);
       setError(null);
       
-      const municipalities = await fetchSheetData(SHEET_GIDS.iloilo);
+      // Fetch all provinces in parallel
+      const provinceEntries = Object.entries(PROVINCE_SHEETS) as [ProvinceKey, typeof PROVINCE_SHEETS[ProvinceKey]][];
       
-      const provinceData: ProvinceData = {
-        name: 'Iloilo',
-        municipalities,
-        grandTotal: calculateGrandTotal(municipalities),
-      };
+      const results = await Promise.allSettled(
+        provinceEntries.map(([key, { name, gid }]) => 
+          fetchSheetData(gid, name).then(data => ({ key, data }))
+        )
+      );
       
-      setData(provinceData);
+      const provinces = {} as Record<ProvinceKey, ProvinceData>;
+      const errors: string[] = [];
+      
+      for (const result of results) {
+        if (result.status === 'fulfilled') {
+          provinces[result.value.key] = result.value.data;
+        } else {
+          errors.push(result.reason?.message || 'Unknown error');
+        }
+      }
+      
+      // Only proceed if we have at least one province
+      if (Object.keys(provinces).length === 0) {
+        throw new Error('Failed to fetch any province data');
+      }
+      
+      const combined = calculateCombinedData(provinces);
+      
+      setData({ provinces, combined });
       setLastUpdated(new Date());
+      
+      if (errors.length > 0) {
+        setError(`Some data failed to load: ${errors.join(', ')}`);
+      }
     } catch (err) {
       console.error('Error fetching Google Sheet data:', err);
       setError(err instanceof Error ? err.message : 'Failed to fetch data');

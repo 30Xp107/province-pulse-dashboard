@@ -1,26 +1,58 @@
+import { useState } from "react";
 import { Target, TrendingUp, AlertTriangle, RefreshCw } from "lucide-react";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { ProvinceCard } from "@/components/dashboard/ProvinceCard";
 import { MunicipalityTable } from "@/components/dashboard/MunicipalityTable";
 import { ValidationChart } from "@/components/dashboard/ValidationChart";
 import { Header } from "@/components/dashboard/Header";
-import { useGoogleSheetData } from "@/hooks/useGoogleSheetData";
+import { useGoogleSheetData, PROVINCE_SHEETS, ProvinceKey } from "@/hooks/useGoogleSheetData";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+type TabValue = 'all' | ProvinceKey;
 
 const Index = () => {
   const { data, loading, error, lastUpdated, refresh } = useGoogleSheetData();
+  const [selectedTab, setSelectedTab] = useState<TabValue>('all');
 
-  const grandTotal = data?.grandTotal || { target: 0, systemResult: 0, systemVariance: 0, municipality: '' };
+  const currentData = selectedTab === 'all' 
+    ? data?.combined 
+    : data?.provinces[selectedTab];
+
+  const grandTotal = currentData?.grandTotal || { target: 0, systemResult: 0, systemVariance: 0, municipality: '' };
   const progressPercentage = grandTotal.target > 0 
     ? Math.round((grandTotal.systemResult / grandTotal.target) * 100) 
     : 0;
+
+  const provinceKeys = Object.keys(PROVINCE_SHEETS) as ProvinceKey[];
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
 
       <main className="container py-8 space-y-8">
+        {/* Province Selector Tabs */}
+        <Tabs value={selectedTab} onValueChange={(v) => setSelectedTab(v as TabValue)} className="w-full">
+          <TabsList className="grid w-full grid-cols-5 lg:w-auto lg:inline-grid">
+            <TabsTrigger
+              value="all"
+              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+            >
+              All Provinces
+            </TabsTrigger>
+            {provinceKeys.map((key) => (
+              <TabsTrigger
+                key={key}
+                value={key}
+                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              >
+                {PROVINCE_SHEETS[key].name}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
+
         {/* Data Status Bar */}
         <div className="flex items-center justify-between bg-card rounded-lg border p-4">
           <div className="flex items-center gap-4">
@@ -91,28 +123,37 @@ const Index = () => {
           )}
         </section>
 
-        {/* Province Card */}
-        {data && (
+        {/* Province Cards - Only show when "All Provinces" is selected */}
+        {selectedTab === 'all' && data && (
           <section className="space-y-4">
             <h2 className="text-xl font-semibold text-foreground">Province Overview</h2>
-            <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-3">
-              <ProvinceCard data={data} delay={0} />
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {provinceKeys.map((key, index) => (
+                data.provinces[key] && (
+                  <ProvinceCard
+                    key={key}
+                    data={data.provinces[key]}
+                    onClick={() => setSelectedTab(key)}
+                    delay={index * 100}
+                  />
+                )
+              ))}
             </div>
           </section>
         )}
 
         {/* Charts Section */}
-        {data && (
+        {currentData && (
           <section className="grid gap-6 lg:grid-cols-2">
-            <ValidationChart data={data} type="bar" />
-            <ValidationChart data={data} type="pie" />
+            <ValidationChart data={currentData} type="bar" />
+            <ValidationChart data={currentData} type="pie" />
           </section>
         )}
 
         {/* Municipality Table */}
-        {data && (
+        {currentData && (
           <section>
-            <MunicipalityTable data={data} />
+            <MunicipalityTable data={currentData} />
           </section>
         )}
 
@@ -128,7 +169,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="border-t bg-card py-6 mt-8">
         <div className="container text-center text-sm text-muted-foreground">
-          <p>Scale-Up Results Dashboard • Iloilo Province</p>
+          <p>Scale-Up Results Dashboard • Western Visayas Region</p>
           <p className="mt-1">Data refreshes automatically every 30 seconds</p>
         </div>
       </footer>
