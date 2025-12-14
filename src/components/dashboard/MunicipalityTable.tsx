@@ -19,8 +19,8 @@ export function MunicipalityTable({ data }: MunicipalityTableProps) {
   return (
     <div className="rounded-xl border bg-card shadow-sm overflow-hidden animate-fade-in">
       <div className="p-6 border-b">
-        <h3 className="text-lg font-semibold text-foreground">
-          {data.name} - Municipality Breakdown
+        <h3 className="text-lg font-semibold text-foreground">        
+          {data.name === "All Provinces" ? "Province" : data.name +" - Municipality"} Breakdown
         </h3>
         <p className="text-sm text-muted-foreground mt-1">
           Target vs System Result by municipality
@@ -30,7 +30,7 @@ export function MunicipalityTable({ data }: MunicipalityTableProps) {
         <Table>
           <TableHeader>
             <TableRow className="bg-muted/50">
-              <TableHead className="font-semibold">Municipality</TableHead>
+              <TableHead className="font-semibold">{data.name === "All Provinces" ? "Province" : "Municipality"}</TableHead>
               <TableHead className="text-right font-semibold">Target</TableHead>
               <TableHead className="text-right font-semibold">System Result</TableHead>
               <TableHead className="text-right font-semibold">System Variance</TableHead>
